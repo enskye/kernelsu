@@ -16,12 +16,12 @@ ccflags-y += -I$(objtree)/security/selinux -include $(srctree)/include/uapi/asm-
 
 obj-$(CONFIG_KSU) += kernelsu.o
 
-NEUTRINO := $(findstring -NeutrinoKernel,$(CONFIG_LOCALVERSION))
+Sultan := $(findstring -Sultan,$(CONFIG_LOCALVERSION))
 
-# Hardcode KSU_VERSION for Neutrino
-ifeq ($(NEUTRINO),-NeutrinoKernel)
+# Hardcode KSU_VERSION for Sultan+
+ifeq ($(Sultan),-Sultan)
 KSU_VERSION=12490
-KSU_LOCALVERSION=$(KSU_VERSION)-neutrino
+KSU_LOCALVERSION=$(KSU_VERSION)-Sultan+
 $(info -- KernelSU version: $(KSU_LOCALVERSION))
 else
   # .git is a text file while the module is imported by 'git submodule add'.
@@ -29,7 +29,7 @@ else
     $(shell cd $(srctree)/$(src); /usr/bin/env PATH="$$PATH":/usr/bin:/usr/local/bin [ -f ../.git/shallow ] && git fetch --unshallow)
     KSU_GIT_VERSION := $(shell cd $(srctree)/$(src); /usr/bin/env PATH="$$PATH":/usr/bin:/usr/local/bin git rev-list --count HEAD)
     # ksu_version: major * 10000 + git version + 200 for historical reasons
-    $(eval KSU_VERSION=$(shell expr 10000 + $(KSU_GIT_VERSION) + 599))
+    $(eval KSU_VERSION=$(shell expr 10000 + $(KSU_GIT_VERSION) + 200))
     $(info -- KernelSU version: $(KSU_VERSION))
   else
   # If there is no .git file, the default version will be passed.
