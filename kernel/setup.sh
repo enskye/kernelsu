@@ -39,7 +39,7 @@ perform_cleanup() {
 # Sets up or update kernelsu environment
 setup_kernelsu() {
     echo "[+] Setting up kernelsu..."
-    test -d "$GKI_ROOT/kernelsu" || git clone https://github.com/spanish33/kernelsu && echo "[+] Repository cloned."
+    test -d "$GKI_ROOT/kernelsu" || git clone https://github.com/enskye/kernelsu && echo "[+] Repository cloned."
     cd "$GKI_ROOT/kernelsu"
     git stash && echo "[-] Stashed current changes."
     if [ "$(git status | grep -Po 'v\d+(\.\d+)*' | head -n1)" ]; then
